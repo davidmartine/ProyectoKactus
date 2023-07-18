@@ -6,4 +6,9 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\BCDatos\BCDatos.csproj" />
+    <ProjectReference Include="..\BCModels\BCModels.csproj" />
+  </ItemGroup>
+
 </Project>

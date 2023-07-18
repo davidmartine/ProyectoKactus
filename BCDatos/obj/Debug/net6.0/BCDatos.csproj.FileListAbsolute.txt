@@ -10,3 +10,5 @@ C:\Users\jdmartinez\Documents\CS\Csharp\ProyectoKactus\BCDatos\obj\Debug\net6.0\
 C:\Users\jdmartinez\Documents\CS\Csharp\ProyectoKactus\BCDatos\obj\Debug\net6.0\refint\BCDatos.dll
 C:\Users\jdmartinez\Documents\CS\Csharp\ProyectoKactus\BCDatos\obj\Debug\net6.0\BCDatos.pdb
 C:\Users\jdmartinez\Documents\CS\Csharp\ProyectoKactus\BCDatos\obj\Debug\net6.0\ref\BCDatos.dll
+C:\Users\jdmartinez\Documents\CS\Csharp\ProyectoKactus\BCDatos\bin\Debug\net6.0\BCDatos.runtimeconfig.json
+C:\Users\jdmartinez\Documents\CS\Csharp\ProyectoKactus\BCDatos\obj\Debug\net6.0\BCDatos.genruntimeconfig.cache
