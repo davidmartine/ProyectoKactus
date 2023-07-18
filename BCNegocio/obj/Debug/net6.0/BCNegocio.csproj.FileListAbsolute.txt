@@ -1,0 +1,12 @@
+C:\Users\jdmartinez\Documents\CS\Csharp\ProyectoKactus\BCNegocio\bin\Debug\net6.0\BCNegocio.deps.json
+C:\Users\jdmartinez\Documents\CS\Csharp\ProyectoKactus\BCNegocio\bin\Debug\net6.0\BCNegocio.dll
+C:\Users\jdmartinez\Documents\CS\Csharp\ProyectoKactus\BCNegocio\bin\Debug\net6.0\BCNegocio.pdb
+C:\Users\jdmartinez\Documents\CS\Csharp\ProyectoKactus\BCNegocio\obj\Debug\net6.0\BCNegocio.csproj.AssemblyReference.cache
+C:\Users\jdmartinez\Documents\CS\Csharp\ProyectoKactus\BCNegocio\obj\Debug\net6.0\BCNegocio.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\jdmartinez\Documents\CS\Csharp\ProyectoKactus\BCNegocio\obj\Debug\net6.0\BCNegocio.AssemblyInfoInputs.cache
+C:\Users\jdmartinez\Documents\CS\Csharp\ProyectoKactus\BCNegocio\obj\Debug\net6.0\BCNegocio.AssemblyInfo.cs
+C:\Users\jdmartinez\Documents\CS\Csharp\ProyectoKactus\BCNegocio\obj\Debug\net6.0\BCNegocio.csproj.CoreCompileInputs.cache
+C:\Users\jdmartinez\Documents\CS\Csharp\ProyectoKactus\BCNegocio\obj\Debug\net6.0\BCNegocio.dll
+C:\Users\jdmartinez\Documents\CS\Csharp\ProyectoKactus\BCNegocio\obj\Debug\net6.0\refint\BCNegocio.dll
+C:\Users\jdmartinez\Documents\CS\Csharp\ProyectoKactus\BCNegocio\obj\Debug\net6.0\BCNegocio.pdb
+C:\Users\jdmartinez\Documents\CS\Csharp\ProyectoKactus\BCNegocio\obj\Debug\net6.0\ref\BCNegocio.dll

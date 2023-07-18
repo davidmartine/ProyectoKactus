@@ -1,0 +1,12 @@
+C:\Users\jdmartinez\Documents\CS\Csharp\ProyectoKactus\BCModels\bin\Debug\net6.0\BCModels.deps.json
+C:\Users\jdmartinez\Documents\CS\Csharp\ProyectoKactus\BCModels\bin\Debug\net6.0\BCModels.dll
+C:\Users\jdmartinez\Documents\CS\Csharp\ProyectoKactus\BCModels\bin\Debug\net6.0\BCModels.pdb
+C:\Users\jdmartinez\Documents\CS\Csharp\ProyectoKactus\BCModels\obj\Debug\net6.0\BCModels.csproj.AssemblyReference.cache
+C:\Users\jdmartinez\Documents\CS\Csharp\ProyectoKactus\BCModels\obj\Debug\net6.0\BCModels.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\jdmartinez\Documents\CS\Csharp\ProyectoKactus\BCModels\obj\Debug\net6.0\BCModels.AssemblyInfoInputs.cache
+C:\Users\jdmartinez\Documents\CS\Csharp\ProyectoKactus\BCModels\obj\Debug\net6.0\BCModels.AssemblyInfo.cs
+C:\Users\jdmartinez\Documents\CS\Csharp\ProyectoKactus\BCModels\obj\Debug\net6.0\BCModels.csproj.CoreCompileInputs.cache
+C:\Users\jdmartinez\Documents\CS\Csharp\ProyectoKactus\BCModels\obj\Debug\net6.0\BCModels.dll
+C:\Users\jdmartinez\Documents\CS\Csharp\ProyectoKactus\BCModels\obj\Debug\net6.0\refint\BCModels.dll
+C:\Users\jdmartinez\Documents\CS\Csharp\ProyectoKactus\BCModels\obj\Debug\net6.0\BCModels.pdb
+C:\Users\jdmartinez\Documents\CS\Csharp\ProyectoKactus\BCModels\obj\Debug\net6.0\ref\BCModels.dll
