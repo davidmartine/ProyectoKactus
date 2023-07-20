@@ -1,4 +1,8 @@
-﻿@{
+﻿@using WebApp.Models.ViewModels;
+
+@model WMCliente
+
+@{
     ViewData["Title"] = "Home Page";
 }
 
@@ -60,6 +64,9 @@
 
     <script>
         $(document).ready(() => {
+
+            ListaClientes();
+
             const Modelo_base = {
                 IdCliente: 0,
                 Nombre: "",
@@ -67,17 +74,33 @@
             }
 
             function mostrarModal(modelo) {
+
                 $("#txtIdcliente").val(modelo.IdCliente);
-                $("#txtClienteNombre").val(modelo.Nombre)
-                $("#txtDireccion").val(modelo.Direccion)
+                $("#txtClienteNombre").val(modelo.Nombre);
+                $("#txtDireccion").val(modelo.Direccion);
 
 
                 $('.modal').modal('show');
 
             }
+
+            function mostrarModalEdit(modelo){
+                $("#txtIdcliente").val(modelo.idcliente);
+                $("#txtClienteNombre").val(modelo.nombreCliente);
+                $("#txtDireccion").val(modelo.direccion);
+
+
+                $('.modal').modal('show');
+            }
+
+
             $("#btnNuevoCliente").click(() => {
 
+                $("#txtClienteNombre").val("");
+                $("#txtDireccion").val("");
                 mostrarModal(Modelo_base);
+                
+
             })
 
             $("#btnGuardar").click(() => {
@@ -88,6 +111,8 @@
                 nuevomodelo["Idcliente"] = $("#txtIdcliente").val();
                 nuevomodelo["NombreCliente"] = $("#txtClienteNombre").val();
                 nuevomodelo["Direccion"] = $("#txtDireccion").val();
+
+
 
                 if ($("#txtIdcliente").val() == "0") {
                     fetch("Home/Insertar", {
@@ -104,9 +129,28 @@
                         })
                         .then((dataJson) => {
                             if (dataJson.valor) {
-                                alert("Registrado");
+                                alert("Cliente Registrado");
                                 $('.modal').modal('hide');
+                                ListaClientes();
+                            }
+                        })
+                }else{
+                    fetch("Home/Actualizar", {
+                        method: "PUT",
+                        headers: {
+                            'Content-Type': 'application/json;charset=utf-8'
+                        },
+                        body: JSON.stringify(nuevomodelo)
 
+                    })
+                        .then((response) => {
+                            return response.ok ? response.json() : Promise.reject(response)
+                        })
+                        .then((dataJson) => {
+                            if (dataJson.valor) {
+                                alert("Cliente Actualizado");
+                                $('.modal').modal('hide');
+                                ListaClientes();
                             }
                         })
                 }
@@ -122,7 +166,7 @@
 
                         //console.log("Respuesta json:", dataJson);
                         // Limpia el contenido actual del tbody de la tabla
-                        $("#tbClientes tbody").html("");
+                        $("tbody#tbody_tbClientes").html("");
 
                         // Itera sobre los datos recibidos y agrega cada cliente como una fila en la tabla.
                         dataJson.forEach((item) => {
@@ -130,11 +174,21 @@
                             console.log(item);
 
                             $("tbody#tbody_tbClientes").append(
-                                '<tr>' +
-                                '<td>' + item.nombreCliente + '</td>' +
-                                '<td>' + item.direccion + '</td>' +
-                                '<td> <button class="btn btn-primary btn-sm me-2 btn-editar" value=' + item.idcliente + '> Editar </button> </td>' +
-                                '</tr>'
+                                $("<tr>").append(
+                                    $("<td>").text(item.nombreCliente),
+                                    $("<td>").text(item.direccion),
+                                    $("<td>").append(
+                                        $("<button>").addClass("btn btn-primary btn-sm me-2 btn-editar").data("modelo", item).text("Editar"),
+                                        $("<button>").addClass("btn btn-danger btn-sm btn-eliminar").data("id", item.idcliente).text("Eliminar")
+                                    )
+                                )
+
+
+                                //'<tr>' +
+                                //'<td>' + item.nombreCliente + '</td>' +
+                                //'<td>' + item.direccion + '</td>' +
+                                //'<td> <button class="btn btn-primary btn-sm me-2 btn-editar" value=' + item.idcliente + '> Editar </button> </td>' +
+                                //'</tr>'
 
 
                                 //$("<td>").append(
@@ -147,7 +201,38 @@
                         });
                     })
             }
-            ListaClientes();
+
+            $("tbody#tbody_tbClientes").on("click",".btn-editar",function() {
+
+                let cliente = $(this).data("modelo")
+                console.log(cliente);
+
+                mostrarModalEdit(cliente)
+            })
+
+
+            $("tbody#tbody_tbClientes").on("click", ".btn-eliminar", function () {
+
+                let idcliente = $(this).data("id")
+                console.log(idcliente);
+
+                let result = window.confirm("¿Realmente Eliminar Cliente?");
+
+                if(result){
+                    fetch("Home/Eliminar?id=" + idcliente, {
+                        method: "DELETE"                       
+
+                    })
+                        .then((response) => {
+                            return response.ok ? response.json() : Promise.reject(response)
+                        })
+                        .then((dataJson) => {
+                            if (dataJson.valor) {
+                                ListaClientes();
+                            }
+                        })
+                }
+            })
         });
 
     </script>
