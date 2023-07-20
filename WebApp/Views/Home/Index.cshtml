@@ -45,9 +45,15 @@
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <input type="hidden" id="txtIdcliente" value="0" />
                 <div class="mb-2">
+<<<<<<< HEAD
                     <label asp-for="NombreCliente" class="form-label">Nombre Cliente</label>
                     <input asp-for="NombreCliente" type="text" class="form-control" id="txtClienteNombre" />
                     <span asp-validation-for="NombreCliente" class="text-danger"></span>
+=======
+                   <label asp-for="NombreCliente" class="form-label">Nombre Cliente</label>
+                   <input asp-for="NombreCliente" type="text" class="form-control" id="txtClienteNombre" />
+                   <span asp-validation-for="NombreCliente" class="text-danger"></span>
+>>>>>>> dev_juan
                 </div>
                 <div class="mb-2">
                     <label>Dirección</label>
@@ -105,6 +111,8 @@
 
             })
 
+            
+
             $("#btnGuardar").click(() => {
 
 
@@ -114,48 +122,66 @@
                 nuevomodelo["NombreCliente"] = $("#txtClienteNombre").val();
                 nuevomodelo["Direccion"] = $("#txtDireccion").val();
 
-
-
-                if ($("#txtIdcliente").val() == "0") {
-                    fetch("Home/Insertar", {
-
-                        method: "POST",
-                        headers: {
-                            'Content-Type': 'application/json;charset=utf-8'
-                        },
-                        body: JSON.stringify(nuevomodelo)
-
+                if(!$("#txtClienteNombre").val()){
+                    Swal.fire({
+                        icon: "error",
+                        title: "Oops...",
+                        text: "El campo nombre esta vacio",
                     })
-                        .then((response) => {
-                            return response.ok ? response.json() : Promise.reject(response)
-                        })
-                        .then((dataJson) => {
-                            if (dataJson.valor) {
-                                alert("Cliente Registrado");
-                                $('.modal').modal('hide');
-                                ListaClientes();
-                            }
-                        })
-                }else{
-                    fetch("Home/Actualizar", {
-                        method: "PUT",
-                        headers: {
-                            'Content-Type': 'application/json;charset=utf-8'
-                        },
-                        body: JSON.stringify(nuevomodelo)
 
-                    })
-                        .then((response) => {
-                            return response.ok ? response.json() : Promise.reject(response)
-                        })
-                        .then((dataJson) => {
-                            if (dataJson.valor) {
-                                alert("Cliente Actualizado");
-                                $('.modal').modal('hide');
-                                ListaClientes();
-                            }
-                        })
                 }
+                else if (!$("#txtDireccion").val()) {
+                    Swal.fire({
+                        icon: "error",
+                        title: "Oops...",
+                        text: "El campo direccion esta vacio",
+                    })
+                }
+                else{
+                    if ($("#txtIdcliente").val() == "0") {
+
+                        fetch("Home/Insertar", {
+
+                            method: "POST",
+                            headers: {
+                                'Content-Type': 'application/json;charset=utf-8'
+                            },
+                            body: JSON.stringify(nuevomodelo)
+
+                        })
+                            .then((response) => {
+                                return response.ok ? response.json() : Promise.reject(response)
+                            })
+                            .then((dataJson) => {
+                                if (dataJson.valor) {
+                                    alert("Cliente Registrado");
+                                    $('.modal').modal('hide');
+                                    ListaClientes();
+                                }
+                            })
+                    } else {
+                        fetch("Home/Actualizar", {
+                            method: "PUT",
+                            headers: {
+                                'Content-Type': 'application/json;charset=utf-8'
+                            },
+                            body: JSON.stringify(nuevomodelo)
+
+                        })
+                            .then((response) => {
+                                return response.ok ? response.json() : Promise.reject(response)
+                            })
+                            .then((dataJson) => {
+                                if (dataJson.valor) {
+                                    alert("Cliente Actualizado");
+                                    $('.modal').modal('hide');
+                                    ListaClientes();
+                                }
+                            })
+                    }
+                }
+                
+               
             });
 
             function ListaClientes() {
