@@ -2,7 +2,153 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="row">
+    <div class="col-sm-12">
+        <div class="card">
+            <div class="card-header">
+                <h2>Clientes</h2>
+            </div>
+            <div class="card-body">
+                <button class="btn btn-primary" id="btnNuevoCliente">
+                    Nuevo Cliente
+                </button>
+                <hr />
+                <table class="table table-striped" id="tbClientes">
+                    <thead>
+                        <tr>
+                            <th>Nombre Cliente</th>
+                            <th>Dirección</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbody_tbClientes">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
 </div>
+
+<div class="modal" tabindex="1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Creación de Cliente</h5>
+                <button type="button" class="btn btn-close" data-bs-dismiss="modal" aria-label="Close">
+                </button>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="txtIdcliente" value="0" />
+                <div class="mb-2">
+                    <label>Nombre Cliente</label>
+                    <input type="text" class="form-control" id="txtClienteNombre" />
+                </div>
+                <div class="mb-2">
+                    <label>Dirección</label>
+                    <input type="text" class="form-control" id="txtDireccion" />
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" id="btnGuardar">Guardar</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+
+    <script>
+        $(document).ready(() => {
+            const Modelo_base = {
+                IdCliente: 0,
+                Nombre: "",
+                Direccion: ""
+            }
+
+            function mostrarModal(modelo) {
+                $("#txtIdcliente").val(modelo.IdCliente);
+                $("#txtClienteNombre").val(modelo.Nombre)
+                $("#txtDireccion").val(modelo.Direccion)
+
+
+                $('.modal').modal('show');
+
+            }
+            $("#btnNuevoCliente").click(() => {
+
+                mostrarModal(Modelo_base);
+            })
+
+            $("#btnGuardar").click(() => {
+
+
+                let nuevomodelo = Modelo_base;
+
+                nuevomodelo["Idcliente"] = $("#txtIdcliente").val();
+                nuevomodelo["NombreCliente"] = $("#txtClienteNombre").val();
+                nuevomodelo["Direccion"] = $("#txtDireccion").val();
+
+                if ($("#txtIdcliente").val() == "0") {
+                    fetch("Home/Insertar", {
+
+                        method: "POST",
+                        headers: {
+                            'Content-Type': 'application/json;charset=utf-8'
+                        },
+                        body: JSON.stringify(nuevomodelo)
+
+                    })
+                        .then((response) => {
+                            return response.ok ? response.json() : Promise.reject(response)
+                        })
+                        .then((dataJson) => {
+                            if (dataJson.valor) {
+                                alert("Registrado");
+                                $('.modal').modal('hide');
+
+                            }
+                        })
+                }
+            });
+
+            function ListaClientes() {
+
+                fetch("Home/Lista")
+                    .then((response) => {
+                        return response.ok ? response.json() : Promise.reject(response)
+                    })
+                    .then((dataJson) => {
+
+                        //console.log("Respuesta json:", dataJson);
+                        // Limpia el contenido actual del tbody de la tabla
+                        $("#tbClientes tbody").html("");
+
+                        // Itera sobre los datos recibidos y agrega cada cliente como una fila en la tabla.
+                        dataJson.forEach((item) => {
+
+                            console.log(item);
+
+                            $("tbody#tbody_tbClientes").append(
+                                '<tr>' +
+                                '<td>' + item.nombreCliente + '</td>' +
+                                '<td>' + item.direccion + '</td>' +
+                                '<td> <button class="btn btn-primary btn-sm me-2 btn-editar" value=' + item.idcliente + '> Editar </button> </td>' +
+                                '</tr>'
+
+
+                                //$("<td>").append(
+                                //    // Agrega botones de editar y eliminar con eventos de clic
+                                //    $("<button>").addClass("btn btn-primary btn-sm me-2 btn-editar").data("modelo", item).text("Editar"),
+                                //    $("<button>").addClass("btn btn-danger btn-sm btn-eliminar").data("id", item.Idcliente).text("Eliminar")
+                                //)
+
+                            )
+                        });
+                    })
+            }
+            ListaClientes();
+        });
+
+    </script>
+}
