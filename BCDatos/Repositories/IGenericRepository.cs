@@ -12,7 +12,7 @@ namespace BCDatos.Repositories
 
         Task<bool> Actualizar(T modelo);
 
-        Task<bool> Eliminar(T modelo);
+        Task<bool> Eliminar(int id);
 
         Task<T> Obtener(int id);
 

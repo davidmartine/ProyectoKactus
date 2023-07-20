@@ -10,3 +10,8 @@ C:\Users\jdmartinez\Documents\CS\Csharp\ProyectoKactus\BCNegocio\obj\Debug\net6.
 C:\Users\jdmartinez\Documents\CS\Csharp\ProyectoKactus\BCNegocio\obj\Debug\net6.0\refint\BCNegocio.dll
 C:\Users\jdmartinez\Documents\CS\Csharp\ProyectoKactus\BCNegocio\obj\Debug\net6.0\BCNegocio.pdb
 C:\Users\jdmartinez\Documents\CS\Csharp\ProyectoKactus\BCNegocio\obj\Debug\net6.0\ref\BCNegocio.dll
+C:\Users\jdmartinez\Documents\CS\Csharp\ProyectoKactus\BCNegocio\bin\Debug\net6.0\BCDatos.dll
+C:\Users\jdmartinez\Documents\CS\Csharp\ProyectoKactus\BCNegocio\bin\Debug\net6.0\BCModels.dll
+C:\Users\jdmartinez\Documents\CS\Csharp\ProyectoKactus\BCNegocio\bin\Debug\net6.0\BCDatos.pdb
+C:\Users\jdmartinez\Documents\CS\Csharp\ProyectoKactus\BCNegocio\bin\Debug\net6.0\BCModels.pdb
+C:\Users\jdmartinez\Documents\CS\Csharp\ProyectoKactus\BCNegocio\obj\Debug\net6.0\BCNegocio.csproj.CopyComplete
