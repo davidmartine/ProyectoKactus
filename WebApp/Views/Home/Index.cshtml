@@ -16,12 +16,12 @@
                 <table class="table table-striped" id="tbClientes">
                     <thead>
                         <tr>
-                            <th >Nombre Cliente</th>
-                            <th >Dirección</th>
+                            <th>Nombre Cliente</th>
+                            <th>Dirección</th>
                             <th></th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody id="tbody_tbClientes">
                     </tbody>
                 </table>
             </div>
@@ -120,26 +120,32 @@
                     })
                     .then((dataJson) => {
 
-                        console.log("Respuesta json:", dataJson);
+                        //console.log("Respuesta json:", dataJson);
                         // Limpia el contenido actual del tbody de la tabla
                         $("#tbClientes tbody").html("");
 
                         // Itera sobre los datos recibidos y agrega cada cliente como una fila en la tabla.
                         dataJson.forEach((item) => {
-                            $("#tbClientes tbody").append(
-                                $("<tr>").append(
-                                    $("<td>").text(item.NombreCliente),
-                                    $("<td>").text(item.Direccion),
-                                    $("<td>").append(
-                                        // Agrega botones de editar y eliminar con eventos de clic
-                                        $("<button>").addClass("btn btn-primary btn-sm me-2 btn-editar").data("modelo", item).text("Editar"),
-                                        $("<button>").addClass("btn btn-danger btn-sm btn-eliminar").data("id", item.Idcliente).text("Eliminar")
-                                    )
-                                )
+
+                            console.log(item);
+
+                            $("tbody#tbody_tbClientes").append(
+                                '<tr>' +
+                                '<td>' + item.nombreCliente + '</td>' +
+                                '<td>' + item.direccion + '</td>' +
+                                '<td> <button class="btn btn-primary btn-sm me-2 btn-editar" value=' + item.idcliente + '> Editar </button> </td>' +
+                                '</tr>'
+
+
+                                //$("<td>").append(
+                                //    // Agrega botones de editar y eliminar con eventos de clic
+                                //    $("<button>").addClass("btn btn-primary btn-sm me-2 btn-editar").data("modelo", item).text("Editar"),
+                                //    $("<button>").addClass("btn btn-danger btn-sm btn-eliminar").data("id", item.Idcliente).text("Eliminar")
+                                //)
+
                             )
                         });
                     })
-
             }
             ListaClientes();
         });

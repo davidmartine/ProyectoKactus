@@ -11,6 +11,7 @@ namespace BCDatos.Repositories
     public class ClienteRepository : IGenericRepository<Cliente>
     {
         private readonly KACTUSContext _context;
+
         public ClienteRepository(KACTUSContext context)
         {
             this._context = context;
