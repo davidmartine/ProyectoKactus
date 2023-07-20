@@ -1,5 +1,8 @@
 using Microsoft.EntityFrameworkCore;
 using BCDatos.DataContext;
+using BCDatos.Repositories;
+using BCModels.DataContext;
+using BCNegocio.Service;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,6 +14,10 @@ builder.Services.AddDbContext<KACTUSContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("conexion"));
 });
+
+builder.Services.AddScoped<IGenericRepository<Cliente>, ClienteRepository>();
+builder.Services.AddScoped<IClienteService,ClienteService>();
+
 
 var app = builder.Build();
 
