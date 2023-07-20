@@ -17,6 +17,10 @@
       "PackagePath": "staticwebassets\\js\\site.js"
     },
     {
+      "Id": "C:\\Users\\jdmartinez\\Documents\\CS\\Csharp\\ProyectoKactus\\WebApp\\wwwroot\\js\\sweetalert2.all.min.js",
+      "PackagePath": "staticwebassets\\js\\sweetalert2.all.min.js"
+    },
+    {
       "Id": "C:\\Users\\jdmartinez\\Documents\\CS\\Csharp\\ProyectoKactus\\WebApp\\wwwroot\\lib\\bootstrap\\LICENSE",
       "PackagePath": "staticwebassets\\lib\\bootstrap"
     },

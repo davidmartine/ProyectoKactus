@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "QBl6d9JdS3ON/8NNdvZZzUMssXDTJ8DV7Qq4JJ1GFcw=",
+  "Hash": "Iv0Ub+snADLS2/VwC0sxJxrwFmDo7TusMjvwBuyHxcw=",
   "Source": "WebApp",
   "BasePath": "_content/WebApp",
   "Mode": "Default",
@@ -100,6 +100,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\js\\site.js"
+    },
+    {
+      "Identity": "C:\\Users\\jdmartinez\\Documents\\CS\\Csharp\\ProyectoKactus\\WebApp\\wwwroot\\js\\sweetalert2.all.min.js",
+      "SourceId": "WebApp",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\jdmartinez\\Documents\\CS\\Csharp\\ProyectoKactus\\WebApp\\wwwroot\\",
+      "BasePath": "_content/WebApp",
+      "RelativePath": "js/sweetalert2.all.min.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\sweetalert2.all.min.js"
     },
     {
       "Identity": "C:\\Users\\jdmartinez\\Documents\\CS\\Csharp\\ProyectoKactus\\WebApp\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css",
