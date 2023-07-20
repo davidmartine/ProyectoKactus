@@ -45,8 +45,9 @@
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <input type="hidden" id="txtIdcliente" value="0" />
                 <div class="mb-2">
-                    <label>Nombre Cliente</label>
-                    <input type="text" class="form-control" id="txtClienteNombre" />
+                    <label asp-for="NombreCliente" class="form-label">Nombre Cliente</label>
+                    <input asp-for="NombreCliente" type="text" class="form-control" id="txtClienteNombre" />
+                    <span asp-validation-for="NombreCliente" class="text-danger"></span>
                 </div>
                 <div class="mb-2">
                     <label>Dirección</label>
