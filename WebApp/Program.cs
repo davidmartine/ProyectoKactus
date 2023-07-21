@@ -17,7 +17,8 @@ builder.Services.AddDbContext<KACTUSContext>(options =>
 
 builder.Services.AddScoped<IGenericRepository<Cliente>, ClienteRepository>();
 builder.Services.AddScoped<IClienteService,ClienteService>();
-
+builder.Services.AddScoped<IGenericRepository<Producto>, ProductoRepository>();
+builder.Services.AddScoped<IProductoService,ProductoService>();
 
 var app = builder.Build();
 
