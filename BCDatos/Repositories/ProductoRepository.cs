@@ -17,29 +17,37 @@ namespace BCDatos.Repositories
             _context = context;
         }
 
-        public Task<bool> Actualizar(Producto modelo)
+        public async Task<bool> Actualizar(Producto modelo)
         {
-            throw new NotImplementedException();
+            _context.Productos.Update(modelo);
+            await _context.SaveChangesAsync();
+            return true;
         }
 
-        public Task<bool> Eliminar(int id)
+        public async Task<bool> Eliminar(int id)
         {
-            throw new NotImplementedException();
+            Producto producto = _context.Productos.First(x => x.Idproducto == id);
+            _context.Productos.Remove(producto);
+            await _context.SaveChangesAsync();
+            return true;
         }
 
-        public Task<bool> Insertar(Producto modelo)
+        public async Task<bool> Insertar(Producto modelo)
         {
-            throw new NotImplementedException();
+            _context.Productos.Add(modelo);
+            await _context.SaveChangesAsync();
+            return true;
         }
 
-        public Task<IQueryable<Producto>> MostrarTodos()
+        public async Task<IQueryable<Producto>> MostrarTodos()
         {
-            throw new NotImplementedException();
+            IQueryable<Producto> queryproducto =  _context.Productos;
+            return queryproducto;
         }
 
-        public Task<Producto> Obtener(int id)
+        public async Task<Producto> Obtener(int id)
         {
-            throw new NotImplementedException();
+            return await _context.Productos.FindAsync(id);
         }
     }
 }

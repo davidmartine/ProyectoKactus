@@ -1,0 +1,197 @@
+﻿@using WebApp.Models.ViewModels;
+
+@model VMProducto
+
+@{
+    ViewData["Title"] = "Producto";
+}
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="card">
+            <div class="card-header">
+                <h2>Productos</h2>
+            </div>
+            <div class="card-body">
+                <button class="btn btn-outline-primary" id="btnNuevoProducto">
+                    Nuevo Producto
+                </button>
+                <hr />
+                <table class="table table-striped" id="tbProductos">
+                    <thead>
+                        <tr>
+                            <th>Nombre Producto</th>
+                            <th>Valor</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbody_tbProductos">
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Creación de Producto</h5>
+                <button type="button" class="btn btn-close" data-bs-dismiss="modal" aria-label="Close">
+                </button>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="txtIdproducto" value="0" />
+                <div class="mb-2">
+                    <label class="form-label">Nombre Producto</label>
+                    <input type="text" class="form-control" placeholder="nombre del producto" id="txtNombreProducto" />
+                </div>
+                <div class="mb-2">
+                    <label class="form-label">Valor Producto</label>
+                    <input type="number" placeholder="valor del producto" class="form-control" id="txtValor" />
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-success" id="btnGuardar">Guardar</button>
+                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancelar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts{
+    <script>
+        $(document).ready(() =>{
+
+            ListarClientes();
+
+            const Modelo_base ={
+                IdProducto: 0,
+                Nombre: "",
+                Valor: 0
+            }
+
+            function mostrarModal(modelo){
+
+                $("#txtIdproducto").val(modelo.IdProducto);
+                $("#txtNombreProducto").val(modelo.Nombre);
+                $("#txtValor").val(modelo.Valor);
+
+                $('.modal').modal('show');
+            }
+
+            $("#btnNuevoProducto").click(() =>{
+
+                mostrarModal(Modelo_base);
+            })
+
+            $("#btnGuardar").click(() => {
+
+                let nuevomodelo= Modelo_base;
+
+                nuevomodelo["Idproducto"] = $("#txtIdproducto").val();
+                nuevomodelo["NombreProducto"] = $("#txtNombreProducto").val();
+                nuevomodelo["Valor"] = $("#txtValor").val();
+
+                let valorinput = parseFloat($("#txtValor").val());
+
+                if (!$("#txtNombreProducto").val()){
+                    Swal.fire({
+                        icon: "error",
+                        title: "Oops...",
+                        text: "El campo nombre producto esta vacio"
+                    })
+                }
+                else if (!$("#txtValor").val() || $("#txtValor") == "0") {
+                    Swal.fire({
+                        icon: "error",
+                        title: "Oops",
+                        text: "El campo valor producto esta vacio y/o se encuentra en cero"
+                    })
+                }
+                else{
+
+                    if ($("#txtIdproducto").val() == "0") {
+
+                        fetch("Insertar", {
+
+                            method: "POST",
+                            headers: {
+                                'Content-Type': 'application/json;charset=utf-8'
+                            },
+                            body: JSON.stringify(nuevomodelo)
+                        })
+                            .then((response) => {
+                                return response.ok ? response.json() : Promise.reject(response)
+                            })
+                            .then((dataJson) => {
+                                if (dataJson.valor) {
+                                    alert("Producto Registrado");
+                                    $('.modal').modal('hide');
+                                    ListarClientes();
+                                }
+                            })
+                    }
+                    else {
+                        fetch("Actualizar", {
+
+                            method: 'PUT',
+                            headers: {
+                                'Content-Type': 'application/json;charset=utf-8'
+                            },
+                            body: JSON.stringify(nuevomodelo)
+                        })
+                            .then((response) => {
+                                return response.ok ? response.json() : Promise.reject(response)
+                            })
+                            .then((dataJson) => {
+                                if (dataJson.valor) {
+                                    alert("Producto Actualizado");
+                                    $('.modal').modal('hide');
+                                    ListarClientes();
+                                }
+                            })
+                    }
+                }   
+                
+            });
+
+            function ListarClientes(){
+                
+                fetch("Lista") 
+                    .then((response) =>{
+                        return response.ok ? response.json() : Promise.reject(response)
+                    })
+                    .then((dataJson) =>{
+
+                        $("tbody#tbody_tbProductos").html("");
+                            dataJson.forEach((item) => {
+                                console.log(item);
+
+                                $("tbody#tbody_tbProductos").append(
+                                    $("<tr>").append(
+                                        $("<td>").text(item.nombreProducto),
+                                        $("<td>").text(item.valor),
+                                        $("<td>").append(
+                                            $("<button>").addClass("btn btn-primary btn-sm me-2 btn-editar").data("modelo",item).text("Editar"),
+                                            $("<button>").addClass("btn btn-danger btn-sm btn-eliminar").data("id", item.idproducto).text("Eliminar")
+                                        
+                                        )
+                                    )
+                                )
+
+                            });
+                    
+                    })
+                
+            }
+
+            
+
+        });
+
+    </script>
+}
