@@ -189,7 +189,46 @@
                 
             }
 
-            
+            $("tbody#tbody_tbProductos").on("click",".btn-editar", function(){
+
+                let producto = $(this).data("modelo")
+                console.log(producto);
+
+                mostrarModalEdit(producto);
+            })
+
+            function mostrarModalEdit(modelo){
+
+                $("#txtIdproducto").val(modelo.idproducto);
+                $("#txtNombreProducto").val(modelo.nombreProducto);
+                $("#txtValor").val(modelo.valor);
+
+                $('.modal').modal('show');
+            }
+
+
+            $("tbody#tbody_tbProductos").on("click",".btn-eliminar", function(){
+
+                let id_producto = $(this).data("id")
+                        console.log(id_producto)
+                
+                let result = window.confirm("¿Estas seguro de Eliminar el Producto");
+
+                if(result){
+                        fetch("Eliminar?id=" + id_producto ,{
+                        method: "DELETE"
+                    })
+
+                    .then((response) => {
+                            return response.ok ? response.json() : Promise.reject(response)
+                    })
+                    .then((dataJson) => {
+                        if(dataJson.valor) {
+                            ListarClientes();
+                        }
+                    })
+                }
+            })
 
         });
 
