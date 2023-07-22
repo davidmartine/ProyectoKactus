@@ -19,6 +19,10 @@ builder.Services.AddScoped<IGenericRepository<Cliente>, ClienteRepository>();
 builder.Services.AddScoped<IClienteService,ClienteService>();
 builder.Services.AddScoped<IGenericRepository<Producto>, ProductoRepository>();
 builder.Services.AddScoped<IProductoService,ProductoService>();
+builder.Services.AddScoped<IGenericRepository<CabezaFactura>, CabezaFacturaRepository>();
+builder.Services.AddScoped<ICabezaFacturaService, CabezaFacturaService>();
+builder.Services.AddScoped<IGenericRepository<DetalleFactura>, DetalleFacturaRepository>();
+builder.Services.AddScoped<IDetalleFacturaService, DetalleFacturaService>();
 
 var app = builder.Build();
 

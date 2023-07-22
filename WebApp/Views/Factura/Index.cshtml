@@ -1,0 +1,134 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="card">
+            <div class="card-header">
+                <h2>Factura</h2>
+            </div>
+            <div class="card-body">
+                <button class="btn btn-outline-primary" id="btnNuevaFacura">
+                    Nueva Factura
+                </button>
+                <hr />
+                <table class="table table-striped" id="tbFactura">
+                    <thead>
+                        <tr>
+                            <th>Fecha Factura</th>
+                            <th>Cliente</th>
+                            <th>Producto</th>
+                            <th>Cantidad</th>
+                            <th>Valor</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbody_tbFactura">
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Creacion de Factura</h5>
+                <button type="button" class="btn btn-close" data-bs-dismiss="modal" aria-label="Close">
+                </button>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="txtIdnumeroFac" value="0"/>
+                <input type="hidden" id="txtIddetalleFactura" value="0" />
+                <div class="mb-2">
+                    <label class="form-label">Fecha Factura</label>
+                    <input type="date" class="form-control" id="txtFecha" />
+                </div>
+                <div class="mb-2">
+                    <label class="form-label">Cliente</label>
+                    <select class="form-select" aria-label="Default select example" id="txtidCliente">
+                        <option selected>Selecciona Cliente</option>
+                        <option value="1">Drogueria Doce</option>
+                        <option value="2">Master Drogueria</option>
+                    </select>               
+                </div>
+                <div class="mb-2">
+                    <label class="form-label">Producto</label>
+                    <select class="form-select" aria-label="Default select example" id="txtidProducto">
+                        <option selected>Selecciona Producto</option>
+                        <option value="1">Complejo B</option>
+                        <option value="2">Vitamina B12</option>
+                    </select>
+                </div>
+                <div class="mb-2">
+                    <label class="form-label">Valor</label>
+                    <input type="number" id="txtValor" class="form-control" />
+                </div>
+                <div class="mb-2">
+                    <label class="form-label">Cantidad</label>
+                    <input type="number" id="txtCantidad" class="form-control" />
+                </div>
+                <div class="mb-2">
+                    <label class="form-label">Total</label>
+                    <input type="number" id="txtTotal" class="form-control" />
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-success" id="btnGuardar">Guardar</button>
+                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancelar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+
+    <script>
+
+        $(document).ready(() => {
+
+            const Modelo_base_cabezafac = {
+
+                IdnumeroFac: 0,
+                Fecha: "",
+                Idcliente: 0,
+                Total: 0
+            }
+
+            const Modelo_base_detallefac = {
+
+                IddetalleFactura: 0,
+                Idproducto: 0,
+                Cantidad: 0,
+                Valor: 0
+            }
+
+            function MostrarModal(modelo){
+
+                $("#txtIdnumeroFac").val(modelo.IdnumeroFac);
+                $("#txtIddetalleFactura").val(modelo.IddetalleFactura);
+                $("#txtFecha").val(modelo.Fecha);
+                $("#txtidCliente").val(modelo.Idcliente);
+                $("#txtidProducto").val(modelo.Idproducto);
+                $("#txtValor").val(modelo.Valor);
+                $("#txtCantidad").val(modelo.Cantidad);
+                $("#txtTotal").val(modelo.Total);
+
+                $('.modal').modal('show');
+            }
+
+            $("#btnNuevaFacura").click(() =>{
+
+                MostrarModal(Modelo_base_cabezafac);
+
+                MostrarModal(Modelo_base_detallefac);
+            })
+        })
+    </script>
+}

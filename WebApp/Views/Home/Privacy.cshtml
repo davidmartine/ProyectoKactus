@@ -1,6 +1,19 @@
 ﻿@{
-    ViewData["Title"] = "Privacy Policy";
+    ViewData["Title"] = "Informacion del Sistema";
+
+    ViewBag.Nombre = "Juan David Martinez Gonzalez";
 }
 <h1>@ViewData["Title"]</h1>
 
-<p>Use this page to detail your site's privacy policy.</p>
+<div class="row">
+    <div class="mb-2">
+        <p><b>Desarrollo de prueba tecnica Delphi-Kactus</b></p>
+    </div>
+    <hr />
+    <div class="mb-2">
+        Nombre del Desarrollador: @ViewBag.Nombre
+    </div>
+    <div class="mb-2">
+        Redes Sociales: <a href="https://www.linkedin.com/in/juandmartinezgonzalez/" >linkedin</a>
+    </div>
+</div>
