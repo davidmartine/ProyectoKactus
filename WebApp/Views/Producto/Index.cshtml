@@ -3,7 +3,7 @@
 @model VMProducto
 
 @{
-    ViewData["Title"] = "Producto";
+    ViewData["Title"] = "Index";
 }
 
 <div class="row">
@@ -66,7 +66,7 @@
     <script>
         $(document).ready(() =>{
 
-            ListarClientes();
+            ListarProducto();
 
             const Modelo_base ={
                 IdProducto: 0,
@@ -108,7 +108,7 @@
                 else if (!$("#txtValor").val() || $("#txtValor") == "0") {
                     Swal.fire({
                         icon: "error",
-                        title: "Oops",
+                        title: "Oops...",
                         text: "El campo valor producto esta vacio y/o se encuentra en cero"
                     })
                 }
@@ -129,16 +129,24 @@
                             })
                             .then((dataJson) => {
                                 if (dataJson.valor) {
-                                    alert("Producto Registrado");
+                                    //alert("Producto Registrado");
+                                    Swal.fire({
+                                        position: "top-center",
+                                        icon: "success",
+                                        title: "Producto Registrado Satisfactoriamente",
+                                        showConfirmButton: false,
+                                        timer: 2000
+                                    })
+
                                     $('.modal').modal('hide');
-                                    ListarClientes();
+                                    ListarProducto();
                                 }
                             })
                     }
                     else {
                         fetch("Actualizar", {
 
-                            method: 'PUT',
+                            method: "PUT",
                             headers: {
                                 'Content-Type': 'application/json;charset=utf-8'
                             },
@@ -149,9 +157,16 @@
                             })
                             .then((dataJson) => {
                                 if (dataJson.valor) {
-                                    alert("Producto Actualizado");
+                                    //alert("Producto Actualizado");
+                                    Swal.fire({
+                                        position: "top-center",
+                                        icon: "success",
+                                        title: "Producto Actualizado",
+                                        showConfirmButton: false,
+                                        timer: 2000
+                                    })
                                     $('.modal').modal('hide');
-                                    ListarClientes();
+                                    ListarProducto();
                                 }
                             })
                     }
@@ -159,7 +174,7 @@
                 
             });
 
-            function ListarClientes(){
+            function ListarProducto(){
                 
                 fetch("Lista") 
                     .then((response) =>{
@@ -212,22 +227,43 @@
                 let id_producto = $(this).data("id")
                         console.log(id_producto)
                 
-                let result = window.confirm("¿Estas seguro de Eliminar el Producto");
+                //let result = window.confirm("¿Estas seguro de Eliminar el Producto");
 
-                if(result){
-                        fetch("Eliminar?id=" + id_producto ,{
-                        method: "DELETE"
-                    })
+                Swal.fire({
+                    title: "Eliminar Producto",
+                    text: "¿Deseas Eliminar el Producto?",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#3085d6",
+                    cancelButtonColor: "#d33",
+                    confirmButtonText: "Si, eliminar producto"
+                })
+                .then((result) =>{
+                    if(result.isConfirmed){
+                        if (result) {
+                            fetch("Eliminar?id=" + id_producto, {
+                                method: "DELETE"
+                            })
 
-                    .then((response) => {
-                            return response.ok ? response.json() : Promise.reject(response)
-                    })
-                    .then((dataJson) => {
-                        if(dataJson.valor) {
-                            ListarClientes();
+                                .then((response) => {
+                                    return response.ok ? response.json() : Promise.reject(response)
+                                })
+                                .then((dataJson) => {
+                                    if (dataJson.valor) {
+                                        Swal.fire(
+                                            "Producto",
+                                            "Producto Eliminado Satisfactoriamente.",
+                                            "success"
+                                        )
+                                        ListarClientes();
+                                    }
+                                })
                         }
-                    })
-                }
+                    }
+
+                })
+
+                
             })
 
         });

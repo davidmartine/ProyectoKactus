@@ -13,7 +13,7 @@
                 <h2>Clientes</h2>
             </div>
             <div class="card-body">
-                <button class="btn btn-primary" id="btnNuevoCliente">
+                <button class="btn btn-outline-primary" id="btnNuevoCliente">
                     Nuevo Cliente
                 </button>
                 <hr />
@@ -53,8 +53,8 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-success" id="btnGuardar">Guardar</button>
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-outline-success" id="btnGuardar">Guardar</button>
+                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancelar</button>
             </div>
         </div>
     </div>
@@ -75,6 +75,10 @@
 
             function mostrarModal(modelo) {
 
+                $("#txtIdcliente").empty();
+                $("#txtClienteNombre").empty();
+                $("#txtDireccion").val('');
+
                 $("#txtIdcliente").val(modelo.IdCliente);
                 $("#txtClienteNombre").val(modelo.Nombre);
                 $("#txtDireccion").val(modelo.Direccion);
@@ -85,6 +89,11 @@
             }
 
             function mostrarModalEdit(modelo){
+
+                $("#txtIdcliente").empty();
+                $("#txtClienteNombre").empty();
+                $("#txtDireccion").val('');
+
                 $("#txtIdcliente").val(modelo.idcliente);
                 $("#txtClienteNombre").val(modelo.nombreCliente);
                 $("#txtDireccion").val(modelo.direccion);
@@ -96,14 +105,11 @@
 
             $("#btnNuevoCliente").click(() => {
 
-                $("#txtClienteNombre").val("");
-                $("#txtDireccion").val("");
+                let paramt = $("#txtDireccion").val();
+                console.log(paramt);
                 mostrarModal(Modelo_base);
-                
 
             })
-
-            
 
             $("#btnGuardar").click(() => {
 
@@ -146,7 +152,17 @@
                             })
                             .then((dataJson) => {
                                 if (dataJson.valor) {
-                                    alert("Cliente Registrado");
+                                    //alert("Cliente Registrado");
+                                    Swal.fire({
+                                        position: "top-center",
+                                        icon: "success",
+                                        title: "Cliente Registrado Satisfactoriamente",
+                                        showConfirmButton: false,
+                                        timer: 2000
+                                    })
+                                    $("#txtClienteNombre").empty();
+                                    $("#txtDireccion").empty();
+
                                     $('.modal').modal('hide');
                                     ListaClientes();
                                 }
@@ -165,7 +181,18 @@
                             })
                             .then((dataJson) => {
                                 if (dataJson.valor) {
-                                    alert("Cliente Actualizado");
+                                    //alert("Cliente Actualizado");
+                                    Swal.fire({
+                                        position: "top-center",
+                                        icon: "success",
+                                        title: "Cliente Actualizado",
+                                        showConfirmButton: false,
+                                        timer: 2000
+                                    })
+
+                                    $("#txtClienteNombre").empty();
+                                    $("#txtDireccion").empty();
+
                                     $('.modal').modal('hide');
                                     ListaClientes();
                                 }
@@ -236,22 +263,40 @@
                 let idcliente = $(this).data("id")
                 console.log(idcliente);
 
-                let result = window.confirm("¿Realmente Eliminar Cliente?");
+                //let result = window.confirm("¿Realmente Eliminar Cliente?");
+                Swal.fire({
+                    title:"Eliminar Cliente",
+                    text: "¿Deseas Eliminar el Cliente?",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#3085d6",
+                    cancelButtonColor: "#d33",
+                    confirmButtonText: "Si, eliminar cliente"
+                })
+                .then((result) =>{
+                    if(result.isConfirmed){
+                        if (result) {
+                            fetch("Home/Eliminar?id=" + idcliente, {
+                                method: "DELETE"
 
-                if(result){
-                    fetch("Home/Eliminar?id=" + idcliente, {
-                        method: "DELETE"                       
-
-                    })
-                        .then((response) => {
-                            return response.ok ? response.json() : Promise.reject(response)
-                        })
-                        .then((dataJson) => {
-                            if (dataJson.valor) {
-                                ListaClientes();
-                            }
-                        })
-                }
+                            })
+                                .then((response) => {
+                                    return response.ok ? response.json() : Promise.reject(response)
+                                })
+                                .then((dataJson) => {
+                                    if (dataJson.valor) {
+                                        Swal.fire(
+                                            "Eliminado",
+                                            "Cliente Eliminado Satisfactoriamente.",
+                                            "success"
+                                        )
+                                        ListaClientes();
+                                    }
+                                })
+                        }
+                    }
+                })
+                
             })
         });
 
